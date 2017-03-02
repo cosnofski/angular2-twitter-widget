@@ -11,13 +11,16 @@ import { TwitterWidgetService } from './twitter-widget.service';
 export class TwitterTimelineComponent implements OnInit, AfterViewInit
 {
 	@Input() screenName: string;
+	@Input() options?:any;
 
 	constructor(private element: ElementRef, private twitterService : TwitterWidgetService){ }
 
 	ngOnInit(){ }
 
 	ngAfterViewInit() {
-		this.twitterService.createTimeline(this.screenName, this.element, {}).then((response:any)=>{
+		this.options = this.options || {};
+		let nativeElement = this.element.nativeElement;
+		this.twitterService.createTimeline(this.screenName, nativeElement, this.options).then((response:any)=>{
 			//success
 		}).catch((error:any)=>{
 			//error
