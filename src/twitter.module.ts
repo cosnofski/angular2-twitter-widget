@@ -1,9 +1,9 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TwitterWidgetService } from './twitter-widget.service';
+import { TwitterWidgetService }     from './twitter-widget.service';
 import { TwitterTimelineComponent } from './twitter-timeline.component';
-import { TwitterTweetComponent } from './twitter-tweet.component';
+import { TwitterTweetComponent }    from './twitter-tweet.component';
 
 @NgModule({
   imports:      [ CommonModule ],
