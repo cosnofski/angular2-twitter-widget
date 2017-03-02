@@ -47,14 +47,14 @@ export class TwitterWidgetService {
         }(document, "script", this.TWITTER_SCRIPT_ID, this.TWITTER_WIDGET_URL));
     }
 
-    createTweet(tweetId:any, element:any){
+    createTweet(tweetId:any, element:any, options:any){
         //(<any>window)['twttr'].widgets.createTweet(this.tweetId, nativeElement, {}).then
         return new Promise((resolve, reject) => {
             this.LoadScript().subscribe(twttr => {
                 let nativeElement = element.nativeElement;
-                let options = [];
+                //let options = [];
 
-                (<any>window)['twttr'].widgets.createTweet(tweetId, nativeElement, {}).then( (embed:any) => {
+                (<any>window)['twttr'].widgets.createTweet(tweetId, nativeElement, options).then( (embed:any) => {
                     console.log('Created tweet widget: ', embed);
                     resolve(true);
                 }).catch((error:any)=>{
@@ -65,23 +65,17 @@ export class TwitterWidgetService {
         })
     }
 
-    createTimeline(screenName:any, element:any, options:any) {
+    createTimeline(screenName:any, nativeElement:any, options:any) {
+        console.log('createTimeline options: ' + JSON.stringify(options));
         return new Promise((resolve, reject) => {
             this.LoadScript().subscribe(twttr => {
-                let nativeElement = element.nativeElement;
-                //let options = [];
-                
-                if(typeof screenName == 'string' && screenName.length > 0){
-                    options['screenName'] = screenName;
-                }
 
-                let dataSource:any = {
+                let args:any = {
                     sourceType : 'profile',
                     screenName : screenName
                 };
                 
-
-                (<any>window)['twttr'].widgets.createTimeline(dataSource, nativeElement, options).then( (embed:any) => {
+                (<any>window)['twttr'].widgets.createTimeline(args, nativeElement, options).then( (embed:any) => {
                     console.log('Created timeline widget: ', embed);
                     resolve(true);
                 }).catch((error:any)=>{
