@@ -34,9 +34,7 @@ export class TwitterWidgetService {
             if (d.getElementById(id)) return t;
 
             js = d.createElement(s);
-            //js.id = id;
             js.setAttribute('id', id);
-            //js.src = url;
             js.setAttribute('src', url);
             fjs.parentNode.insertBefore(js, fjs);
 
@@ -84,23 +82,4 @@ export class TwitterWidgetService {
             })
         })
     }
-
-    createTimelineNew(timelineArgs:any, element:any, options:any) {
-        return new Promise((resolve, reject) => {
-            this.LoadScript().subscribe(twttr => {
-                let nativeElement = element.nativeElement;
-                //let options = [];
-
-                twttr.widgets.createTimeline(timelineArgs, element, options).then( (embed:any) => {
-                    console.log('Created timeline widget: ', embed);
-                    resolve(true);
-                }).catch((error:any)=>{
-                    console.log('Could not create widget: ', error);
-                    resolve(false);
-                })
-            })
-        })
-    }  
 }
-
-//export interface Window { [key: string]: any }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 import { ICollectionDataSource, IListDataSource, IProfileDataSource, IUrlDataSource, IWidgetDataSource } from './timeline-datasource'
 import { TwitterWidgetService } from './twitter-widget.service';
 
@@ -8,7 +8,7 @@ import { TwitterWidgetService } from './twitter-widget.service';
 	styles: [ `` ],
 	providers: []
 })
-export class TwitterTimelineComponent implements OnInit, AfterViewInit
+export class TwitterTimelineComponent implements AfterViewInit
 {
 	@Input() dataSource: ICollectionDataSource | IListDataSource | IProfileDataSource | IUrlDataSource | IWidgetDataSource;
 	@Input() options?:any;
@@ -16,8 +16,6 @@ export class TwitterTimelineComponent implements OnInit, AfterViewInit
 	constructor(private element: ElementRef, private twitterService : TwitterWidgetService){ 
 		console.log('TwitterTimelineComponent: constructor()')
 	}
-
-	ngOnInit(){ }
 
 	ngAfterViewInit() {
 		this.options = this.options || {};
