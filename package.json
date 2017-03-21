@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cosnofski/angular2-twitter"
+    "url": "https://github.com/cosnofski/angular2-twitter-widget"
   },
   "author": {
     "name": "Evan Dillon",
@@ -21,26 +21,43 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cosnofski/angular2-twitter/issues"
+    "url": "https://github.com/cosnofski/angular2-twitter-widget/issues"
   },
   "main": "./dist/index.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@angular/cli": "^1.0.0-rc.1",
     "@angular/common": "^2.0.0",
     "@angular/compiler": "^2.4.5",
     "@angular/compiler-cli": "^2.4.5",
     "@angular/core": "^2.0.0",
     "@angular/platform-browser": "^2.4.5",
+    "@angular/platform-browser-dynamic": "^2.4.5",
     "@angular/platform-server": "^2.4.5",
-    "codelyzer": "^3.0.0-beta.0",
-    "rxjs": "^5.0.1",
-    "tslint": "^4.5.1",
-    "typescript": "^2.0.2",
-    "zone.js": "0.7.2",
+    "@angular/router": "^3.4.9",
     "@types/es6-shim": "^0.31.32",
-    "@types/jasmine": "^2.5.40",
-    "@types/selenium-webdriver": "^2.53.39"
+    "@types/jasmine": "^2.5.43",
+    "@types/node": "^7.0.5",
+    "@types/selenium-webdriver": "^2.53.39",
+    "angular-cli": "^1.0.0-beta.28.3",
+    "codecov": "^1.0.1",
+    "codelyzer": "^3.0.0-beta.0",
+    "jasmine-core": "^2.5.2",
+    "jasmine-spec-reporter": "^3.2.0",
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.3.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-mocha-reporter": "^2.2.2",
+    "karma-remap-istanbul": "^0.6.0",
+    "rxjs": "^5.0.1",
+    "ts-node": "^2.1.0",
+    "tslint": "^4.5.1",
+    "tslint-eslint-rules": "^3.4.0",
+    "typescript": "^2.0.2",
+    "zone.js": "0.7.2"
   },
   "engines": {
     "node": ">=0.8.0"

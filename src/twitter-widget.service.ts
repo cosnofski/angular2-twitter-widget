@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-
+import { ICollectionDataSource, IListDataSource, IProfileDataSource, IUrlDataSource, IWidgetDataSource, TimelineDataSource } from './timeline-datasource'
+//declare var window:any;
+//declare var document:any;
 @Injectable()
 export class TwitterWidgetService {
     readonly TWITTER_SCRIPT_ID = 'twitter-wjs';
@@ -16,7 +18,7 @@ export class TwitterWidgetService {
             that.startScriptLoad();
 
             //WHEN TWITTER WIDGETS SCRIPT IS LOADED, THEN PASS ALONG....
-            (<any>window)['twttr'].ready(function onLoadTwitterScript(twttr:any){
+            (<any>window)['twttr'].ready((twttr:any)=>{
                 observer.next(twttr);
                 observer.complete();
             }); 
@@ -32,9 +34,10 @@ export class TwitterWidgetService {
             if (d.getElementById(id)) return t;
 
             js = d.createElement(s);
-            js.id = id;
-            js.setAttribute('src', url);
+            //js.id = id;
+            js.setAttribute('id', id);
             //js.src = url;
+            js.setAttribute('src', url);
             fjs.parentNode.insertBefore(js, fjs);
 
             t._e = [];
@@ -65,17 +68,13 @@ export class TwitterWidgetService {
         })
     }
 
-    createTimeline(screenName:any, nativeElement:any, options:any) {
+    createTimeline(dataSource:ICollectionDataSource | IListDataSource | IProfileDataSource | IUrlDataSource | IWidgetDataSource, nativeElement:any, options:any) {
+        console.log('createTimeline dataSource: ' + JSON.stringify(dataSource));
         console.log('createTimeline options: ' + JSON.stringify(options));
         return new Promise((resolve, reject) => {
             this.LoadScript().subscribe(twttr => {
-
-                let args:any = {
-                    sourceType : 'profile',
-                    screenName : screenName
-                };
-                
-                (<any>window)['twttr'].widgets.createTimeline(args, nativeElement, options).then( (embed:any) => {
+                console.log(twttr);
+                twttr.widgets.createTimeline(dataSource, nativeElement, options).then( (embed:any) => {
                     console.log('Created timeline widget: ', embed);
                     resolve(true);
                 }).catch((error:any)=>{
@@ -92,7 +91,7 @@ export class TwitterWidgetService {
                 let nativeElement = element.nativeElement;
                 //let options = [];
 
-                (<any>window)['twttr'].widgets.createTimeline(timelineArgs, element, options).then( (embed:any) => {
+                twttr.widgets.createTimeline(timelineArgs, element, options).then( (embed:any) => {
                     console.log('Created timeline widget: ', embed);
                     resolve(true);
                 }).catch((error:any)=>{

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
-
+import { ICollectionDataSource, IListDataSource, IProfileDataSource, IUrlDataSource, IWidgetDataSource } from './timeline-datasource'
 import { TwitterWidgetService } from './twitter-widget.service';
 
 @Component({
@@ -10,18 +10,21 @@ import { TwitterWidgetService } from './twitter-widget.service';
 })
 export class TwitterTimelineComponent implements OnInit, AfterViewInit
 {
-	@Input() screenName: string;
+	@Input() dataSource: ICollectionDataSource | IListDataSource | IProfileDataSource | IUrlDataSource | IWidgetDataSource;
 	@Input() options?:any;
 
-	constructor(private element: ElementRef, private twitterService : TwitterWidgetService){ }
+	constructor(private element: ElementRef, private twitterService : TwitterWidgetService){ 
+		console.log('TwitterTimelineComponent: constructor()')
+	}
 
 	ngOnInit(){ }
 
 	ngAfterViewInit() {
 		this.options = this.options || {};
 		let nativeElement = this.element.nativeElement;
-		this.twitterService.createTimeline(this.screenName, nativeElement, this.options).then((response:any)=>{
+		this.twitterService.createTimeline(this.dataSource, nativeElement, this.options).then((response:any)=>{
 			//success
+			console.log(`WidgetResponse: ${response}`)
 		}).catch((error:any)=>{
 			//error
 		})
